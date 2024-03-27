@@ -1,6 +1,13 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav
+  class="navbar navbar-expand-lg navbar-light bg-white shadow-sm"
+  *ngIf="showMenu()"
+>
   <div class="container">
-    <a class="navbar-brand" routerLink="dashboard">IsqEventos</a>
+    <a class="navbar-brand" routerLink="dashboard">
+      <div class="icon-container">
+        <i class="fa fa-users mb-2"></i>
+      </div>
+    </a>
     <button
       class="navbar-toggler"
       (click)="isCollapsed = !isCollapsed"
@@ -22,7 +29,7 @@
     >
       <ul class="navbar-nav mr-auto">
         <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" aria-current="page" routerLink="eventos"
+          <a class="nav-link" aria-current="page" routerLink="eventos/lista"
             >Eventos</a
           >
         </li>
@@ -52,9 +59,9 @@
             class="dropdown-menu"
             aria-labelledby="navbarDropdownMenuLink"
           >
-            <a class="dropdown-item" routerLink="perfil"> Perfil </a>
+            <a class="dropdown-item" routerLink="user/perfil"> Perfil </a>
             <div role="separator" class="divider"></div>
-            <a class="dropdown-item" routerLink="sair"> Sair </a>
+            <a class="dropdown-item" routerLink="user/login"> Sair </a>
           </div>
         </li>
       </ul>
