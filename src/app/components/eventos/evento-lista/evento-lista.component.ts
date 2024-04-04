@@ -14,8 +14,9 @@ import { EventoService } from 'src/app/services/evento.service';
 export class EventoListaComponent implements OnInit {
   public eventos: Evento[] = [];
   public eventosFiltrados: Evento[] = [];
-  public LarguraImagem: number = 150;
-  public margemImagem: number = 2;
+  public eventoId = 0;
+  public larguraImagem = 150;
+  public margemImagem = 2;
   public exibirImagem: boolean = true;
   private _filtroLista: string = '';
 
@@ -51,33 +52,54 @@ export class EventoListaComponent implements OnInit {
 
   ngOnInit(): void {
     this.spinner.show();
-    this.getEventos();
+    this.carregarEventos();
   }
 
   public alterarValorImagem(): void {
     this.exibirImagem = !this.exibirImagem;
   }
 
-  public getEventos(): void {
+  public carregarEventos(): void {
     this.eventoService.getEventos().subscribe({
       next: (_eventos: Evento[]) => {
         (this.eventos = _eventos), (this.eventosFiltrados = this.eventos);
       },
       error: (error: any) => {
-        this.spinner.hide();
         this.toastr.error('Erro ao Carregar os Eventos', 'Erro!');
+        this.spinner.hide();
       },
       complete: () => this.spinner.hide(),
     });
   }
 
-  openModal(template: TemplateRef<void>) {
+  openModal(event: any, template: TemplateRef<any>, eventoId: number) {
+    event.stopPropagation();
+    this.eventoId = eventoId;
     this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
   }
 
   confirm(): void {
     this.modalRef?.hide();
-    this.toastr.success('Deletado');
+    this.spinner.show();
+
+    this.eventoService
+      .deleteEvento(this.eventoId)
+      .subscribe(
+        (result: any) => {
+          if (result.message === 'Deletado') {
+            this.toastr.success(
+              'O Evento foi deletado com Sucesso.',
+              'Deletado!'
+            );
+            this.carregarEventos();
+          }
+        },
+        (error: any) => {
+          console.error(error);
+          this.toastr.error('Erro ao tentar deletar os Eventos', 'Erro!');
+        }
+      )
+      .add(() => this.spinner.hide());
   }
 
   decline(): void {
