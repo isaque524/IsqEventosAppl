@@ -4,11 +4,9 @@ import { Observable } from 'rxjs';
 import { Evento } from '../models/Evento';
 import { take } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class EventoService {
-  baseUrl = 'https://isqeventosapi.azurewebsites.net/api/evento';
+  baseUrl = 'https://localhost:7051/api/Evento';
 
   constructor(private http: HttpClient) {}
 

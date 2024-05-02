@@ -15,6 +15,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxCurrencyModule } from 'ngx-currency';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EventosComponent } from './components/eventos/eventos.component';
 import { PalestrantesComponent } from './components/palestrantes/palestrantes.component';
@@ -33,6 +34,8 @@ import { RegistraComponent } from './components/user/registrar/registra.componen
 
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { ptBrLocale } from 'ngx-bootstrap/locale';
+import { EventoService } from './services/evento.service';
+import { LoteService } from './services/lote.service';
 defineLocale('pt-br', ptBrLocale);
 
 @NgModule({
@@ -71,8 +74,9 @@ defineLocale('pt-br', ptBrLocale);
       progressBar: true,
     }),
     NgxSpinnerModule,
+    NgxCurrencyModule,
   ],
-  providers: [],
+  providers: [EventoService, LoteService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
