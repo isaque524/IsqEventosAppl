@@ -6,6 +6,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Evento } from 'src/app/models/Evento';
 import { EventoService } from 'src/app/services/evento.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-evento-lista',
@@ -54,6 +55,12 @@ export class EventoListaComponent implements OnInit {
   ngOnInit(): void {
     this.spinner.show();
     this.carregarEventos();
+  }
+
+  public mostraImagem(imagemURL: string): string {
+    return imagemURL !== ''
+      ? `${environment.apiUrl}resources/images/${imagemURL}`
+      : 'assets/img/semImage.png';
   }
 
   public alterarValorImagem(): void {
