@@ -10,8 +10,44 @@ import { EventoListaComponent } from './components/eventos/evento-lista/evento-l
 import { UserComponent } from './components/user/user.component';
 import { LoginComponent } from './components/user/login/login.component';
 import { RegistraComponent } from './components/user/registrar/registra.component';
+import { AuthGuard } from './guard/auth.guard';
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  {
+    path: '',
+    runGuardsAndResolvers: 'always',
+    canActivate: [AuthGuard],
+    children: [
+      { path: 'user', redirectTo: 'user/perfil' },
+      { path: 'user/perfil', component: PerfilComponent },
+
+      { path: 'eventos', redirectTo: 'eventos/lista' },
+      {
+        path: 'eventos',
+        component: EventosComponent,
+        children: [
+          { path: 'detalhe/:id', component: EventoDetalheComponent },
+          { path: 'detalhe', component: EventoDetalheComponent },
+          { path: 'lista', component: EventoListaComponent },
+        ],
+      },
+      {
+        path: 'palestrantes',
+        component: PalestrantesComponent,
+      },
+
+      {
+        path: 'dashboard',
+        component: DashboardComponent,
+      },
+      { path: 'contatos', component: ContatosComponent },
+    ],
+  },
+
+  //Fim do guard
+
   {
     path: 'user',
     component: UserComponent,
@@ -20,24 +56,11 @@ const routes: Routes = [
       { path: 'registrar', component: RegistraComponent },
     ],
   },
-  { path: 'user/perfil', component: PerfilComponent },
-
-  { path: 'eventos', redirectTo: 'eventos/lista' },
   {
-    path: 'eventos',
-    component: EventosComponent,
-    children: [
-      { path: 'detalhe/:id', component: EventoDetalheComponent },
-      { path: 'detalhe', component: EventoDetalheComponent },
-      { path: 'lista', component: EventoListaComponent },
-    ],
+    path: 'home',
+    component: HomeComponent,
   },
-  { path: 'palestrantes', component: PalestrantesComponent },
-
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'contatos', component: ContatosComponent },
-  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-  { path: '**', redirectTo: 'dashboard', pathMatch: 'full' },
+  { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
 
 @NgModule({

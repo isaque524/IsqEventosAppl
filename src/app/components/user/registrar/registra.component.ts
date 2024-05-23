@@ -1,3 +1,6 @@
+import { error } from '@angular/compiler/src/util';
+import { Router } from '@angular/router';
+import { AccountService } from './../../../services/account.service';
 import { Component, OnInit } from '@angular/core';
 import {
   AbstractControlOptions,
@@ -6,6 +9,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { ValidatorField } from 'src/app/helpers/validatorField';
+import { User } from 'src/app/models/identity/User';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-registra',
@@ -13,37 +18,48 @@ import { ValidatorField } from 'src/app/helpers/validatorField';
   styleUrls: ['./registra.component.scss'],
 })
 export class RegistraComponent implements OnInit {
+  user = {} as User;
+
   form!: FormGroup;
 
   get f(): any {
     return this.form.controls;
   }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private accountService: AccountService,
+    private router: Router,
+    private toaster: ToastrService
+  ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.validation();
   }
 
-  public validation(): void {
+  private validation(): void {
     const formOptions: AbstractControlOptions = {
-      validators: ValidatorField.MustMatch('senha', 'confirmeSenha'),
+      validators: ValidatorField.MustMatch('password', 'confirmePassword'),
     };
 
     this.form = this.fb.group(
       {
         primeiroNome: ['', Validators.required],
-        sobrenome: ['', Validators.required],
+        ultimoNome: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
         userName: ['', Validators.required],
-        senha: ['', [Validators.required, Validators.minLength(6)]],
-        confirmeSenha: ['', [Validators.required]],
+        password: ['', [Validators.required, Validators.minLength(4)]],
+        confirmePassword: ['', Validators.required],
       },
       formOptions
     );
   }
 
-  public resetForm(): void {
-    this.form.reset();
+  register(): void {
+    this.user = { ...this.form.value };
+    this.accountService.register(this.user).subscribe(
+      () => this.router.navigateByUrl('/dashboard'),
+      (error: any) => this.toaster.error(error.error)
+    );
   }
 }

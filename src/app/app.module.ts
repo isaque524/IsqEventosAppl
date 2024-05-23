@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
@@ -36,6 +36,9 @@ import { defineLocale } from 'ngx-bootstrap/chronos';
 import { ptBrLocale } from 'ngx-bootstrap/locale';
 import { EventoService } from './services/evento.service';
 import { LoteService } from './services/lote.service';
+import { AccountService } from './services/account.service';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { HomeComponent } from './components/home/home.component';
 defineLocale('pt-br', ptBrLocale);
 
 @NgModule({
@@ -52,6 +55,7 @@ defineLocale('pt-br', ptBrLocale);
     EventoDetalheComponent,
     EventoListaComponent,
     UserComponent,
+    HomeComponent,
     LoginComponent,
     RegistraComponent,
   ],
@@ -76,8 +80,12 @@ defineLocale('pt-br', ptBrLocale);
     NgxSpinnerModule,
     NgxCurrencyModule,
   ],
-  providers: [EventoService, LoteService],
+  providers: [
+    EventoService,
+    LoteService,
+    AccountService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}
