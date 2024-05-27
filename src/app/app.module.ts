@@ -1,3 +1,4 @@
+import { PaginationModule } from 'ngx-bootstrap/pagination/';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -70,6 +71,7 @@ defineLocale('pt-br', ptBrLocale);
     TooltipModule.forRoot(),
     BsDropdownModule.forRoot(),
     BsDatepickerModule.forRoot(),
+    PaginationModule.forRoot(),
     ModalModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 4000,
