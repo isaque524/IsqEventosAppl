@@ -11,6 +11,7 @@ import {
 import { ValidatorField } from 'src/app/helpers/validatorField';
 import { User } from 'src/app/models/identity/User';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-registra',
@@ -30,7 +31,8 @@ export class RegistraComponent implements OnInit {
     private fb: FormBuilder,
     private accountService: AccountService,
     private router: Router,
-    private toaster: ToastrService
+    private toaster: ToastrService,
+    private spinner: NgxSpinnerService
   ) {}
 
   ngOnInit(): void {
@@ -56,10 +58,14 @@ export class RegistraComponent implements OnInit {
   }
 
   register(): void {
+    this.spinner.show();
     this.user = { ...this.form.value };
-    this.accountService.register(this.user).subscribe(
-      () => this.router.navigateByUrl('/dashboard'),
-      (error: any) => this.toaster.error(error.error)
-    );
+    this.accountService
+      .register(this.user)
+      .subscribe(
+        () => this.router.navigateByUrl('/dashboard'),
+        (error: any) => this.toaster.error(error.error)
+      )
+      .add(this.spinner.hide());
   }
 }

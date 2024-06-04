@@ -1,3 +1,4 @@
+
 import { PaginationModule } from 'ngx-bootstrap/pagination/';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -13,6 +14,7 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -40,6 +42,10 @@ import { LoteService } from './services/lote.service';
 import { AccountService } from './services/account.service';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import { HomeComponent } from './components/home/home.component';
+import { PerfilDetalheComponent } from './components/user/perfil/perfil-detalhe/perfil-detalhe.component';
+import { PalestrantesListarComponent } from './components/palestrantes/palestrantes-listar/palestrantes-listar.component';
+import { PalestranteDetalheComponent } from './components/palestrantes/palestrante-detalhe/palestrante-detalhe.component';
+import { RedesSociaisComponent } from './components/redesSociais/redesSociais.component';
 defineLocale('pt-br', ptBrLocale);
 
 @NgModule({
@@ -47,9 +53,13 @@ defineLocale('pt-br', ptBrLocale);
     AppComponent,
     EventosComponent,
     PalestrantesComponent,
+    PalestrantesListarComponent,
+    PalestranteDetalheComponent,
     NavComponent,
     DateTimeFormatPipe,
     PerfilComponent,
+    PerfilDetalheComponent,
+    RedesSociaisComponent,
     DashboardComponent,
     ContatosComponent,
     TituloComponent,
@@ -73,6 +83,7 @@ defineLocale('pt-br', ptBrLocale);
     BsDatepickerModule.forRoot(),
     PaginationModule.forRoot(),
     ModalModule.forRoot(),
+    TabsModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 4000,
       positionClass: 'toast-bottom-right',
@@ -90,4 +101,4 @@ defineLocale('pt-br', ptBrLocale);
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
