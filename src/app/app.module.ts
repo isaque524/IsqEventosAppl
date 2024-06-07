@@ -47,7 +47,6 @@ import { PalestrantesListarComponent } from './components/palestrantes/palestran
 import { PalestranteDetalheComponent } from './components/palestrantes/palestrante-detalhe/palestrante-detalhe.component';
 import { RedesSociaisComponent } from './components/redesSociais/redesSociais.component';
 import { IConfig, NgxMaskModule } from 'ngx-mask';
-import { TextMaskModule } from 'angular2-text-mask';
 defineLocale('pt-br', ptBrLocale);
 
 @NgModule({
@@ -75,7 +74,6 @@ defineLocale('pt-br', ptBrLocale);
   imports: [
     BrowserModule,
     FormsModule,
-    TextMaskModule,
     ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,

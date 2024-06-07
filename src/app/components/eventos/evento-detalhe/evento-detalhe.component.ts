@@ -91,10 +91,6 @@ export class EventoDetalheComponent implements OnInit {
     }
   }
 
-  public maskTel() {
-    return "(00)0 0000-0000"
-  }
-
   public carregarLotes(): void {
     this.loteService
       .getLotesByEventoId(this.eventoId)

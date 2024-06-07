@@ -100,7 +100,7 @@
                 [ngClass]="cssValidator(f.telefone)"
                 formControlName="telefone"
                 placeholder="(00)0 0000-0000"
-                [mask]="maskTel()"
+                mask="(00)0 0000-0000"
                 [(ngModel)]="evento.telefone"
               />
               <div
@@ -284,7 +284,7 @@
             <i class="fas fa-share-square"></i>
           </h2>
         </div>
-        <app-redesSociais [eventoId]="eventoId" ></app-redesSociais>
+        <app-redesSociais [eventoId]="eventoId"></app-redesSociais>
       </div>
     </div>
   </div>
