@@ -44,7 +44,7 @@ export class PalestrantesListarComponent implements OnInit {
   public filtrarPalestrantes(evt: any): void {
     if (this.termoBuscaChanged.observers.length === 0) {
       this.termoBuscaChanged
-        .pipe(debounceTime(1000))
+        .pipe(debounceTime(2000))
         .subscribe((filtrarPor) => {
           this.spinner.show();
           this.palestranteService.getPalestrantes(

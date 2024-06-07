@@ -63,7 +63,7 @@ export class PalestranteDetalheComponent implements OnInit {
           this.situacaoDoForm = 'Minicurrículo está sendo Atualizado!';
           this.corDaDescricao = 'text-warning';
         }),
-        debounceTime(1000),
+        debounceTime(2000),
         tap(() => this.spinner.show())
       )
       .subscribe(() => {

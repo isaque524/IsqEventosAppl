@@ -32,7 +32,7 @@ export class EventoListaComponent implements OnInit {
   public filtrarEventos(evt: any): void {
     if (this.termoBuscaChanged.observers.length === 0) {
       this.termoBuscaChanged
-        .pipe(debounceTime(1000))
+        .pipe(debounceTime(2000))
         .subscribe((filtrarPor) => {
           this.spinner.show();
           this.eventoService
@@ -63,7 +63,7 @@ export class EventoListaComponent implements OnInit {
     private toastr: ToastrService,
     private spinner: NgxSpinnerService,
     private route: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.pagination = {
@@ -130,7 +130,6 @@ export class EventoListaComponent implements OnInit {
           }
         },
         (error: any) => {
-          console.error(error);
           this.toastr.error('Erro ao tentar deletar os Eventos', 'Erro!');
         }
       )

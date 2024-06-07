@@ -99,14 +99,15 @@
                 class="form-control"
                 [ngClass]="cssValidator(f.telefone)"
                 formControlName="telefone"
-                placeholder="(00)90000-0000"
+                placeholder="(00)0 0000-0000"
+                [mask]="maskTel()"
                 [(ngModel)]="evento.telefone"
               />
               <div
-                *ngIf="f.telefone.errors?.required && f.telefone.touched"
+                *ngIf="f.telefone.errors && f.telefone.touched"
                 class="invalid-feedback"
               >
-                Telefone é obrigatório.
+                Telefone Invalido.
               </div>
             </div>
             <div class="form-group col-md-6">
@@ -274,7 +275,6 @@
         </div>
       </div>
     </div>
-    bazinga
 
     <div class="card rounded shadow-sm mt-3" *ngIf="modoEditar">
       <div class="p-3">
@@ -284,7 +284,7 @@
             <i class="fas fa-share-square"></i>
           </h2>
         </div>
-        <app-redesSociais></app-redesSociais>
+        <app-redesSociais [eventoId]="eventoId" ></app-redesSociais>
       </div>
     </div>
   </div>

@@ -32,7 +32,6 @@ export class PerfilComponent implements OnInit {
       this.imagemURL = environment.apiUrl + `resources/perfil/${this.usuario.imagemURL}`;
     else
       this.imagemURL = './assets/img/Perfil.jpg';
-    console.log(usuario)
   }
 
   onFileChange(ev: any): void {
@@ -58,7 +57,6 @@ export class PerfilComponent implements OnInit {
         },
         (error: any) => {
           this.toastr.error('Erro ao fazer upload de imagem', 'Error!');
-          console.log(error);
         }
       )
       .add(() => this.spinner.hide());

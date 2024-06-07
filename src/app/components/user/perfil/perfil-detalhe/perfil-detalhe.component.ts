@@ -56,13 +56,11 @@ export class PerfilDetalheComponent implements OnInit {
       .getUser()
       .subscribe(
         (userRetorno: UserUpdate) => {
-          console.log(userRetorno);
           this.userUpdate = userRetorno;
           this.form.patchValue(this.userUpdate);
           this.toaster.success('Usuario Carregado', 'Sucesso');
         },
         (error) => {
-          console.log(error);
           this.toaster.error('Usuario não Carregado', 'Error');
           this.router.navigate(['/dashboard']);
         }
@@ -83,7 +81,7 @@ export class PerfilDetalheComponent implements OnInit {
         primeiroNome: ['', Validators.required],
         ultimoNome: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
-        phoneNumber: ['', [Validators.required]],
+        phoneNumber: ['', [Validators.required, Validators.minLength(11)]],
         descricao: ['', Validators.required],
         funcao: ['NaoInformado', Validators.required],
         password: ['', [Validators.minLength(4), Validators.nullValidator]],
@@ -105,7 +103,7 @@ export class PerfilDetalheComponent implements OnInit {
         () => this.toaster.success('Função palestrante Ativada!', 'Sucesso!'),
         (error) => {
           this.toaster.error('A função palestrante não pode ser Ativada', 'Error');
-          console.error(error);
+
         }
       )
     }
@@ -116,7 +114,6 @@ export class PerfilDetalheComponent implements OnInit {
         () => this.toaster.success('Usuário atualizado!', 'Sucesso'),
         (error) => {
           this.toaster.error(error.error);
-          console.error(error);
         }
       )
       .add(() => this.spinner.hide());

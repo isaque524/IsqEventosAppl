@@ -84,11 +84,15 @@ export class EventoDetalheComponent implements OnInit {
           },
           (error: any) => {
             this.toastr.error('Erro ao tentar carregar Evento.', 'Erro!');
-            console.error(error);
+
           }
         )
         .add(() => this.spinner.hide());
     }
+  }
+
+  public maskTel() {
+    return "(00)0 0000-0000"
   }
 
   public carregarLotes(): void {
@@ -102,7 +106,7 @@ export class EventoDetalheComponent implements OnInit {
         },
         (error: any) => {
           this.toastr.error('Erro ao tentar carregar lotes', 'Erro');
-          console.error(error);
+
         }
       )
       .add(() => this.spinner.hide());
@@ -178,7 +182,7 @@ export class EventoDetalheComponent implements OnInit {
           this.router.navigate([`eventos/detalhe/${eventoRetorno.id}`]);
         },
         (error: any) => {
-          console.error(error);
+
           this.spinner.hide();
           this.toastr.error('Error ao salvar evento', 'Erro');
         },
@@ -198,7 +202,7 @@ export class EventoDetalheComponent implements OnInit {
           },
           (error: any) => {
             this.toastr.error('Erro ao tentar salvar lotes.', 'Erro');
-            console.error(error);
+
           }
         )
         .add(() => this.spinner.hide());
@@ -229,7 +233,6 @@ export class EventoDetalheComponent implements OnInit {
             `Erro ao tentar deletar o Lote ${this.loteAtual.id}`,
             'Erro'
           );
-          console.error(error);
         }
       )
       .add(() => this.spinner.hide());
@@ -262,7 +265,6 @@ export class EventoDetalheComponent implements OnInit {
         },
         (error: any) => {
           this.toastr.error('Erro ao fazer upload de imagem', 'Error!');
-          console.log(error);
         }
       )
       .add(() => this.spinner.hide());
