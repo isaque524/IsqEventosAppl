@@ -229,7 +229,7 @@
                       type="text"
                       class="form-control"
                       value="{{
-                        lotes.get(i + '.dataInicio').value | date : 'dd/MM/yyyy'
+                        lotes.get(i + '.dataInicio').value.slice(0, 11)
                       }}"
                       bsDatepicker
                       (bsValueChange)="mudarValorData($event, i, 'dataInicio')"
@@ -241,9 +241,7 @@
                       type="text"
                       class="form-control"
                       bsDatepicker
-                      value="{{
-                        lotes.get(i + '.dataFim').value | date : 'dd/MM/yyyy'
-                      }}"
+                      value="{{ lotes.get(i + '.dataFim').value.slice(0, 11) }}"
                       (bsValueChange)="mudarValorData($event, i, 'dataFim')"
                     />
                   </div>
